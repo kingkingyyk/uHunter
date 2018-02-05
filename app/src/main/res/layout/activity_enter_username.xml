@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.kingkingyyk.uhunter.EnterUsername">
+    tools:context="com.kingkingyyk.uhunter.ui.EnterUsername">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -54,6 +54,8 @@
                 android:layout_width="366dp"
                 android:layout_height="wrap_content"
                 android:hint="Enter your UVA Username"
+                android:imeOptions="actionGo"
+                android:inputType="text"
                 android:maxLines="1"
                 android:minLines="1" />
         </android.support.design.widget.TextInputLayout>

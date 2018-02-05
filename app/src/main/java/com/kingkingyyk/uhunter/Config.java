@@ -1,12 +1,12 @@
 package com.kingkingyyk.uhunter;
 
-/**
- * Created by King on 2/4/2018.
- */
+import com.kingkingyyk.uhunter.uhunt.User;
+
 
 public class Config {
 
     public static final String UHUNT_URL = "https://uhunt.onlinejudge.org";
+    public static User CURRENT_USER = null;
 
 
 }

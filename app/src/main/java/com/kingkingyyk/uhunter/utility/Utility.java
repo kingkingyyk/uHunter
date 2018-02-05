@@ -1,10 +1,15 @@
 package com.kingkingyyk.uhunter.utility;
 
+import com.kingkingyyk.uhunter.uhunt.User;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.net.URL;
 import java.net.HttpURLConnection;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
-import android.util.Log;
+
 
 public class Utility {
 
@@ -22,20 +27,23 @@ public class Utility {
                 sb.append(s);
                 sb.append("\n");
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            conn.disconnect();
-        }
+        } finally { conn.disconnect();}
         return sb.toString().trim();
     }
 
     public static int username2id (String baseURL, String username) {
         try {
             return Integer.parseInt(Utility.readStringFromURL(baseURL+"/api/uname2uid/"+username));
+        } catch (Exception e) {}
+        return -1;
+    }
+
+    public static User getUserById (String baseURL, int id) {
+        try {
+            return User.fromJSONObject(new JSONArray(Utility.readStringFromURL(baseURL+"/api/ranklist/"+id+"/0/0")).getJSONObject(0));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return -1;
+        return null;
     }
 }

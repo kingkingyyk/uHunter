@@ -1,4 +1,4 @@
-package com.kingkingyyk.uhunter;
+package com.kingkingyyk.uhunter.ui;
 
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
@@ -7,8 +7,11 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.os.AsyncTask;
 
+import com.kingkingyyk.uhunter.Config;
 import com.kingkingyyk.uhunter.databinding.ActivityEnterUsernameBinding;
 import com.kingkingyyk.uhunter.utility.Utility;
+import com.kingkingyyk.uhunter.R;
+import android.content.Intent;
 
 public class EnterUsername extends AppCompatActivity {
     private ActivityEnterUsernameBinding binding;
@@ -23,23 +26,34 @@ public class EnterUsername extends AppCompatActivity {
             @Override public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
             @Override public void afterTextChanged(Editable editable) { binding.btnVerifyUsername.setEnabled(editable.length()>0); }
         });
-        binding.btnVerifyUsername.setOnClickListener( view -> {;
-            TaskVerifyUsername task=new TaskVerifyUsername();
+        binding.btnVerifyUsername.setOnClickListener(view -> {
+            TaskVerifyUsername task = new TaskVerifyUsername();
             task.execute(binding.textFieldUVAUsername.getText().toString());
         });
     }
 
     private class TaskVerifyUsername extends AsyncTask<String,Void,Integer> {
-        @Override protected Integer doInBackground(String... params) { return Utility.username2id(Config.UHUNT_URL,params[0]); }
+        @Override protected Integer doInBackground(String... params) {
+            int id=Utility.username2id(Config.UHUNT_URL,params[0]);
+            if (id > 0) {
+                Config.CURRENT_USER = Utility.getUserById(Config.UHUNT_URL,id);
+                if (Config.CURRENT_USER==null) id=0;
+                System.out.println(Config.CURRENT_USER.getId());
+            }
+            return id;
+        }
 
         @Override
         protected void onPostExecute(Integer result) {
-            binding.textFieldUVAUsername.setEnabled(true);
-            binding.btnVerifyUsername.setEnabled(true);
-            binding.btnVerifyUsername.setText("Next");
             if (result == -1) binding.lblUsernameStatus.setText("Error connecting to uHunt server!");
             else if (result==0) binding.lblUsernameStatus.setText("Invalid username!");
-            else binding.lblUsernameStatus.setText("Welcome back!");
+            else {
+                Intent intent = new Intent(EnterUsername.this, ActivityHome.class);
+                startActivity(intent);
+            }
+            binding.textFieldUVAUsername.setEnabled(result <= 0);
+            binding.btnVerifyUsername.setEnabled(result <= 0);
+            binding.btnVerifyUsername.setText("Next");
         }
 
         @Override
