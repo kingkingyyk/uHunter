@@ -14,7 +14,7 @@
             android:layout_height="150dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="62dp"
+            android:layout_marginTop="51dp"
             android:scaleType="fitXY"
             app:srcCompat="@mipmap/ic_launcher_foreground"
             tools:layout_editor_absoluteX="138dp"
@@ -38,22 +38,24 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/textInputLayout"
             android:layout_below="@+id/textInputLayout"
+            android:layout_marginTop="10dp"
             android:textAlignment="viewStart" />
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/textInputLayout"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView3"
             android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true">
+            android:layout_marginTop="33dp">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/textFieldUVAUsername"
                 android:layout_width="366dp"
                 android:layout_height="wrap_content"
                 android:hint="Enter your UVA Username"
-                android:minLines="1"
-                android:maxLines="1"/>
+                android:maxLines="1"
+                android:minLines="1" />
         </android.support.design.widget.TextInputLayout>
 
     </RelativeLayout>
