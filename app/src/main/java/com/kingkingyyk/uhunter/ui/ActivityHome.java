@@ -1,5 +1,8 @@
 package com.kingkingyyk.uhunter.ui;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -12,6 +15,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.kingkingyyk.uhunter.Config;
+import com.kingkingyyk.uhunter.DataManager;
 import com.kingkingyyk.uhunter.R;
 import com.kingkingyyk.uhunter.databinding.ActivityHomeBinding;
 
@@ -42,6 +46,7 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) drawer.closeDrawer(GravityCompat.START);
+        else super.onBackPressed();
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -66,6 +71,13 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+
+        if (id == R.id.nav_logout) {
+            finish();
+            DataManager.clearData(this,"username");
+            Intent intent = new Intent(ActivityHome.this, EnterUsername.class);
+            startActivity(intent);
+        }
         return true;
     }
 

@@ -8,5 +8,4 @@ public class Config {
     public static final String UHUNT_URL = "https://uhunt.onlinejudge.org";
     public static User CURRENT_USER = null;
 
-
 }

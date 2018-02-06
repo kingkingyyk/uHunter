@@ -1,6 +1,9 @@
 package com.kingkingyyk.uhunter.ui;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -8,6 +11,7 @@ import android.text.TextWatcher;
 import android.os.AsyncTask;
 
 import com.kingkingyyk.uhunter.Config;
+import com.kingkingyyk.uhunter.DataManager;
 import com.kingkingyyk.uhunter.databinding.ActivityEnterUsernameBinding;
 import com.kingkingyyk.uhunter.utility.Utility;
 import com.kingkingyyk.uhunter.R;
@@ -30,6 +34,16 @@ public class EnterUsername extends AppCompatActivity {
             TaskVerifyUsername task = new TaskVerifyUsername();
             task.execute(binding.textFieldUVAUsername.getText().toString());
         });
+
+        checkAndLoadStoredData();
+    }
+
+    private void checkAndLoadStoredData() {
+        String savedUsername = DataManager.loadString(this, "username","NO_USER");
+        if (!savedUsername.equals("NO_USER")) {
+            binding.textFieldUVAUsername.setText(savedUsername);
+            binding.btnVerifyUsername.performClick();
+        }
     }
 
     private class TaskVerifyUsername extends AsyncTask<String,Void,Integer> {
@@ -48,6 +62,8 @@ public class EnterUsername extends AppCompatActivity {
             if (result == -1) binding.lblUsernameStatus.setText("Error connecting to uHunt server!");
             else if (result==0) binding.lblUsernameStatus.setText("Invalid username!");
             else {
+                DataManager.saveString(EnterUsername.this, "username", binding.textFieldUVAUsername.getText().toString());
+                finish();
                 Intent intent = new Intent(EnterUsername.this, ActivityHome.class);
                 startActivity(intent);
             }
