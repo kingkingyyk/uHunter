@@ -1,6 +1,6 @@
 package com.kingkingyyk.uhunter.ui;
 
-import android.content.Context;
+import android.animation.ValueAnimator;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,8 +13,11 @@ import com.kingkingyyk.uhunter.R;
 import com.kingkingyyk.uhunter.databinding.FragmentProfileBinding;
 import com.kingkingyyk.uhunter.uhunt.User;
 
+import java.util.Random;
+
 
 public class FragmentProfile extends Fragment {
+    private static boolean isAnimated=false;
     private OnFragmentInteractionListener mListener;
     private FragmentProfileBinding binding;
     private User u;
@@ -42,9 +45,23 @@ public class FragmentProfile extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false);
         if (getArguments() != null) {
-            binding.textViewRankingValue.setText("#"+getArguments().getInt("rank"));
-            binding.textViewAnswerCorrectValue.setText(String.valueOf(getArguments().getInt("ac")));
-            binding.textViewNoOfSubmissionsValue.setText(String.valueOf(getArguments().getInt("nos")));
+            Random rdn=new Random();
+            ValueAnimator animator = ValueAnimator.ofInt(rdn.nextInt(100001)+100000, getArguments().getInt("rank"));
+            animator.setDuration(!isAnimated ? rdn.nextInt(1000)+500 : 0);
+            animator.addUpdateListener(animation -> binding.textViewRankingValue.setText("#"+animation.getAnimatedValue().toString()));
+            animator.start();
+
+            animator = ValueAnimator.ofInt(0, getArguments().getInt("ac"));
+            animator.setDuration(!isAnimated ? rdn.nextInt(1000)+500 : 0);
+            animator.addUpdateListener(animation -> binding.textViewAnswerCorrectValue.setText(animation.getAnimatedValue().toString()));
+            animator.start();
+
+            animator = ValueAnimator.ofInt(0, getArguments().getInt("nos"));
+            animator.setDuration(!isAnimated ? rdn.nextInt(1000)+500 : 0);
+            animator.addUpdateListener(animation -> binding.textViewNoOfSubmissionsValue.setText(animation.getAnimatedValue().toString()));
+            animator.start();
+
+            if (!isAnimated) isAnimated=true;
         }
         return binding.getRoot();
     }
