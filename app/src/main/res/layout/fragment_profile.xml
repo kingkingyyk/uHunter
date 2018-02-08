@@ -1,61 +1,169 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <LinearLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp"
-        tools:context="com.kingkingyyk.uhunter.ui.FragmentProfile">
+        tools:context="com.kingkingyyk.uhunter.ui.FragmentProfile"
+        android:orientation="vertical"
+        android:animateLayoutChanges="true"
+        android:background="@color/cardview_light_background">
 
-        <!-- TODO: Update blank fragment layout -->
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@android:color/holo_blue_dark"
+            app:cardBackgroundColor="#5C6BC0"
             app:cardUseCompatPadding="true">
 
             <RelativeLayout
                 android:id="@+id/layoutRanking"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp">
+                android:padding="12dp">
 
                 <ImageView
-                    android:id="@+id/imageViewIcon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
+                    android:id="@+id/imageViewRankingIcon"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_alignParentEnd="true"
                     android:layout_alignParentTop="true"
                     android:adjustViewBounds="false"
                     android:cropToPadding="false"
                     android:paddingBottom="5dp"
-                    android:paddingRight="20dp"
+                    android:paddingRight="5dp"
                     android:paddingTop="5dp"
                     android:src="@drawable/ic_trending_up_white_48dp" />
 
                 <TextView
-                    android:id="@+id/textViewTitle"
+                    android:id="@+id/textViewRankingTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:layout_toRightOf="@+id/imageViewIcon"
-                    android:text="Ranking"
+                    android:text="My World Ranking"
                     android:textColor="@android:color/background_light"
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/textViewValue"
-                    android:layout_width="match_parent"
+                    android:id="@+id/textViewRankingValue"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/textViewTitle"
-                    android:layout_toRightOf="@+id/imageViewIcon"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/textViewRankingTitle"
+                    android:layout_toStartOf="@+id/imageViewRankingIcon"
+                    android:paddingTop="5dp"
                     android:text="Value"
-                    android:textAlignment="textEnd"
+                    android:textAlignment="viewStart"
                     android:textColor="@android:color/background_light"
-                    android:textSize="30sp" />
+                    android:textSize="28sp" />
 
             </RelativeLayout>
         </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="#3949AB"
+            app:cardUseCompatPadding="true">
+
+            <RelativeLayout
+                android:id="@+id/layoutAnswerCorrect"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp">
+
+                <ImageView
+                    android:id="@+id/imageViewAnswerCorrectIcon"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:adjustViewBounds="false"
+                    android:cropToPadding="false"
+                    android:paddingBottom="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingTop="5dp"
+                    android:src="@drawable/ic_done_all_white_48dp" />
+
+                <TextView
+                    android:id="@+id/textViewAnswerCorrectTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:text="Solved Questions"
+                    android:textColor="@android:color/background_light"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/textViewAnswerCorrectValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/textViewAnswerCorrectTitle"
+                    android:layout_toStartOf="@+id/imageViewAnswerCorrectIcon"
+                    android:paddingTop="5dp"
+                    android:text="Value"
+                    android:textAlignment="viewStart"
+                    android:textColor="@android:color/background_light"
+                    android:textSize="28sp" />
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="#283593"
+            app:cardUseCompatPadding="true">
+
+            <RelativeLayout
+                android:id="@+id/layoutNoOfSubmissionsCorrect"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp">
+
+                <ImageView
+                    android:id="@+id/imageViewNoOfSubmissionsIcon"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:adjustViewBounds="false"
+                    android:cropToPadding="false"
+                    android:paddingBottom="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingTop="5dp"
+                    android:src="@drawable/ic_file_upload_white_48dp" />
+
+                <TextView
+                    android:id="@+id/textViewNoOfSubmissionsTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:text="No. of Submissions"
+                    android:textColor="@android:color/background_light"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/textViewNoOfSubmissionsValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@+id/textViewNoOfSubmissionsTitle"
+                    android:layout_toStartOf="@+id/imageViewNoOfSubmissionsIcon"
+                    android:paddingTop="5dp"
+                    android:text="Value"
+                    android:textAlignment="viewStart"
+                    android:textColor="@android:color/background_light"
+                    android:textSize="28sp" />
+
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
     </LinearLayout>
 </layout>

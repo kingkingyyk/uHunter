@@ -17,14 +17,18 @@ import com.kingkingyyk.uhunter.uhunt.User;
 public class FragmentProfile extends Fragment {
     private OnFragmentInteractionListener mListener;
     private FragmentProfileBinding binding;
+    private User u;
 
     public FragmentProfile() {}
 
     public static FragmentProfile newInstance(User u) {
         FragmentProfile fragment = new FragmentProfile();
         Bundle args = new Bundle();
-        args.putInt("ranking",u.getRank());
+        args.putInt("rank", u.getRank());
+        args.putInt("ac", u.getAc());
+        args.putInt("nos", u.getNoOfSubmissions());
         fragment.setArguments(args);
+        fragment.u=u;
         return fragment;
     }
 
@@ -38,7 +42,9 @@ public class FragmentProfile extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false);
         if (getArguments() != null) {
-            binding.textViewValue.setText("#"+getArguments().getInt("ranking"));
+            binding.textViewRankingValue.setText("#"+getArguments().getInt("rank"));
+            binding.textViewAnswerCorrectValue.setText(String.valueOf(getArguments().getInt("ac")));
+            binding.textViewNoOfSubmissionsValue.setText(String.valueOf(getArguments().getInt("nos")));
         }
         return binding.getRoot();
     }

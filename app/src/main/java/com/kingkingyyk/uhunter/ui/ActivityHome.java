@@ -25,6 +25,7 @@ import com.kingkingyyk.uhunter.databinding.ActivityHomeBinding;
 
 public class ActivityHome extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private ActivityHomeBinding binding;
+    private int lastNavigationMenuId=-1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,18 +82,22 @@ public class ActivityHome extends AppCompatActivity implements NavigationView.On
         } */
 
         binding.drawerLayout.closeDrawer(GravityCompat.START);
-        if (id == R.id.nav_profile) {
-            Fragment fragment=(Fragment) FragmentProfile.newInstance(Config.CURRENT_USER);
-            FragmentManager fman = getSupportFragmentManager();
-            fman.beginTransaction().replace(R.id.frameContent, fragment).commit();
-            item.setChecked(true);
-            setTitle(item.getTitle());
-        } else if (id == R.id.nav_logout) {
-            finish();
-            DataManager.clearData(this,"username");
-            Intent intent = new Intent(ActivityHome.this, EnterUsername.class);
-            startActivity(intent);
+        if (lastNavigationMenuId != id) {
+            if (id == R.id.nav_profile) {
+                Fragment fragment=(Fragment) FragmentProfile.newInstance(Config.CURRENT_USER);
+                FragmentManager fman = getSupportFragmentManager();
+                fman.beginTransaction().replace(R.id.frameContent, fragment).commit();
+                item.setChecked(true);
+                setTitle(item.getTitle());
+            } else if (id == R.id.nav_logout) {
+                finish();
+                DataManager.clearData(this,"username");
+                Intent intent = new Intent(ActivityHome.this, EnterUsername.class);
+                startActivity(intent);
+            }
+            lastNavigationMenuId = id;
         }
+
         return true;
     }
 
